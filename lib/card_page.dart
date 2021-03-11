@@ -12,6 +12,7 @@ class CardDetailsMaterialPage extends Page {
   Route createRoute(BuildContext context) {
     return PageRouteBuilder(
       settings: this,
+      transitionDuration: Duration(milliseconds: 600),
       pageBuilder: (context, animation, animation2) {
         final tween = Tween(begin: 0.0, end: 1.0);
         final curveTween = CurveTween(curve: Curves.easeInOut);
