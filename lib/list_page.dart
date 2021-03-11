@@ -4,8 +4,8 @@ import 'package:flutter_demo_wallet_app/data.dart';
 import 'package:flutter_demo_wallet_app/wallet_element.dart';
 
 class ListPage extends StatefulWidget {
-  ListPage({Key key, this.items}) : super(key: key);
-
+  ListPage({Key key, this.items, this.onTapped}) : super(key: key);
+  final ValueChanged<CardItem> onTapped;
   final List<CardItem> items;
 
   @override
@@ -29,20 +29,24 @@ class _ListPageState extends State<ListPage> {
         itemCount: items.length,
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          return CardWidget(
-            item: items[index],
-            changeCallback: (item) {
-              if (item.isExpanded) {
-                setState(() {
-                  items = items.map((e) {
-                    if (e.isExpanded && e.id != item.id) {
-                      e.isExpanded = false;
-                    }
-                    return e;
-                  }).toList();
-                });
-              }
-            },
+          return Hero(
+            tag: items[index].id,
+            child: CardWidget(
+              item: items[index],
+              changeCallback: (item) {
+                if (item.isExpanded) {
+                  setState(() {
+                    items = items.map((e) {
+                      if (e.isExpanded && e.id != item.id) {
+                        e.isExpanded = false;
+                      }
+                      return e;
+                    }).toList();
+                  });
+                }
+              },
+              onOpenCard: widget.onTapped,
+            ),
           );
         },
       ),

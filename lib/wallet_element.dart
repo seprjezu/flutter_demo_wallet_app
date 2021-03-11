@@ -85,8 +85,8 @@ class BottomImageClipper extends CustomClipper<Rect> {
 class CardWidget extends StatefulWidget {
   final CardItem item;
   final void Function(CardItem cardItem) changeCallback;
-
-  const CardWidget({Key key, this.item, this.changeCallback}) : super(key: key);
+  final ValueChanged<CardItem> onOpenCard;
+  const CardWidget({Key key, this.item, this.changeCallback, this.onOpenCard}) : super(key: key);
 
   @override
   _CardWidgetState createState() => _CardWidgetState();
@@ -110,10 +110,28 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              widget.item.logo,
-              width: 48.0,
-              color: Colors.white,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  widget.item.logo,
+                  width: 48.0,
+                  color: Colors.white,
+                ),
+                TextButton(
+                  onPressed: () {
+                   widget.onOpenCard(widget.item);
+                  },
+                  child: Text(
+                    "DETAILS",
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.white,
+                      fontFamily: 'Karla',
+                    ),
+                  ),
+                )
+              ],
             ),
             AnimatedSize(
               duration: duration,
@@ -132,42 +150,46 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
               ),
               child: CardNumber(lastNumbers: widget.item.lastNumbers),
             ),
-            AnimatedSize(
+            AnimatedOpacity(
+              opacity: widget.item.isExpanded ? 1.0 : 0.0,
               duration: duration,
-              vsync: this,
-              child: widget.item.isExpanded
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        top: 16,
-                        left: 8,
-                        right: 16,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            widget.item.owner,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontFamily: 'Karla',
+              child: AnimatedSize(
+                duration: duration,
+                vsync: this,
+                child: widget.item.isExpanded
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                          top: 16,
+                          left: 8,
+                          right: 16,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              widget.item.owner,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                fontFamily: 'Karla',
+                              ),
                             ),
-                          ),
-                          Text(
-                            widget.item.endDate,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontFamily: 'Karla',
+                            Text(
+                              widget.item.endDate,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                fontFamily: 'Karla',
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      )
+                    : const SizedBox(
+                        width: double.infinity,
+                        height: 0,
                       ),
-                    )
-                  : const SizedBox(
-                      width: 0,
-                      height: 0,
-                    ),
+              ),
             ),
             AnimatedSize(
               duration: duration,
@@ -177,7 +199,7 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
                       size: Size.fromHeight(16.0),
                     )
                   : const SizedBox(
-                      width: 0,
+                      width: double.infinity,
                       height: 0,
                     ),
             ),
