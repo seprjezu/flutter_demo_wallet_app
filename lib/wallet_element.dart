@@ -6,16 +6,36 @@ import 'package:flutter_demo_wallet_app/data.dart';
 
 class CardBackplate extends StatelessWidget {
   final Widget child;
-  final Color backgroundColor;
+  final Color startColor;
+  final Color endColor;
+  final bool isSelected;
 
-  CardBackplate({Key key, this.child, this.backgroundColor}) : super(key: key);
+  CardBackplate({
+    Key key,
+    this.child,
+    this.startColor,
+    this.endColor,
+    this.isSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: backgroundColor,
-      shape: RoundedRectangleBorder(
+    return Container(
+      margin: const EdgeInsets.all(4.0),
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
+        boxShadow: [
+          BoxShadow(
+            color: endColor,
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          )
+        ],
+        gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [startColor, endColor]),
       ),
       child: Padding(
         padding: const EdgeInsets.only(
@@ -105,7 +125,9 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
         });
       },
       child: CardBackplate(
-        backgroundColor: widget.item.color,
+        startColor: widget.item.startColor,
+        endColor: widget.item.endColor,
+        isSelected: widget.item.isExpanded,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,6 +138,7 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
                 Image.asset(
                   widget.item.logo,
                   width: 48.0,
+                  height: 32.0,
                   color: Colors.white,
                 ),
                 TextButton(
@@ -208,13 +231,13 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
               children: [
                 Align(
                   heightFactor: 0.66,
-                  widthFactor: 0.8,
                   alignment: Alignment.topCenter,
                   child: ClipRect(
                     clipper: BottomImageClipper(0.66),
                     child: Image.asset(
                       widget.item.logo,
                       height: 64.0,
+                      width: 120.0,
                       color: Colors.white.withOpacity(0.3),
                     ),
                   ),

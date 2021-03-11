@@ -6,7 +6,8 @@ class CardItem {
   final String lastNumbers;
   final String owner;
   final String endDate;
-  final Color color;
+  final Color endColor;
+  final Color startColor;
   bool isExpanded;
 
   CardItem(
@@ -15,17 +16,8 @@ class CardItem {
     this.lastNumbers,
     this.owner,
     this.endDate,
-    this.color,
+    this.startColor,
+    this.endColor,
     this.isExpanded,
   );
-
-  static CardItem createVisa(String id) => CardItem(
-        id,
-        'images/visa.png',
-        '1234',
-        'AGAFIA AMELOVA',
-        '03/24',
-        const Color(0xFFF48FB1),
-        false,
-      );
 }
