@@ -28,6 +28,7 @@ class _DetailsPageState extends State<DetailsPage>
 
   @override
   void initState() {
+    super.initState();
     monthsController = CarouselControllerImpl();
     actionsController = CarouselControllerImpl();
 
@@ -84,8 +85,10 @@ class _DetailsPageState extends State<DetailsPage>
                                 widget.cardItem.lastNumbers,
                                 widget.cardItem.owner,
                                 widget.cardItem.endDate,
-                                widget.cardItem.color,
-                                false)
+                                widget.cardItem.startColor,
+                                widget.cardItem.endColor,
+                                false,
+                              )
                             : widget.cardItem,
                       ),
                     ),
