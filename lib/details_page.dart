@@ -92,198 +92,231 @@ class _DetailsPageState extends State<DetailsPage>
                     ),
                   ),
                 ),
-                AnimatedOpacity(
-                  opacity: _incomeOpacity,
-                  duration: duration,
-                  child: Container(
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Text(
-                                  'INCOME',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16.0),
-                                child: Text(
-                                  '\$ 3,200,000',
-                                  style: TextStyle(
-                                    fontSize: 22.0,
-                                    color: Colors.black,
-                                    fontFamily: 'Karla',
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: SizedBox(
-                                  height: 2,
-                                  width: 40,
-                                  child: ColoredBox(
-                                    color: Colors.green,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Icon(
-                            Icons.more_vert,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Text(
-                                  'SPENT',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16.0),
-                                child: Text(
-                                  '\$ 1,400,000',
-                                  style: TextStyle(
-                                    fontSize: 22.0,
-                                    color: Colors.black,
-                                    fontFamily: 'Karla',
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: SizedBox(
-                                  height: 2,
-                                  width: 40,
-                                  child: ColoredBox(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                AnimatedOpacity(
-                  opacity: _datesOpacity,
-                  duration: duration,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                TweenAnimationBuilder(
+                  curve: Curves.easeInOut,
+                  duration: Duration(seconds: 1),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  builder: (BuildContext context, double value, Widget child) {
+                    return Transform.scale(
+                      child: child,
+                      scale: value,
+                    );
+                  },
+                  child: AnimatedOpacity(
+                    opacity: _incomeOpacity,
+                    duration: duration,
                     child: Container(
-                      alignment: Alignment.center,
                       color: Colors.white,
-                      child: CarouselSlider.builder(
-                        carouselController: monthsController,
-                        itemCount: months.length,
-                        itemBuilder: (context, index, realIndex) {
-                          return Container(
-                            child: Center(
-                              child: Transform.scale(
-                                scale: _currentMonthsPageDouble != null
-                                    ? 1.7 -
-                                        (realIndex - _currentMonthsPageDouble)
-                                            .abs()
-                                    : 1.7,
-                                child: Text(
-                                  months[index],
-                                  style: TextStyle(
-                                    fontFamily: 'Karla',
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: Text(
+                                    'INCOME',
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: Text(
+                                    '\$ 3,200,000',
+                                    style: TextStyle(
+                                      fontSize: 22.0,
+                                      color: Colors.black,
+                                      fontFamily: 'Karla',
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: SizedBox(
+                                    height: 2,
+                                    width: 40,
+                                    child: ColoredBox(
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                          );
-                        },
-                        options: CarouselOptions(
-                            onPageChanged: (index, reason) {
-                              if (reason !=
-                                  CarouselPageChangedReason.controller) {
-                                setState(() {
-                                  _currentMonthsPage = index;
-                                  actionsController
-                                      .animateToPage(_currentMonthsPage);
-                                });
-                              }
-                            },
-                            onScrolled: (page) {
-                              setState(() {
-                                _currentMonthsPageDouble = page;
-                              });
-                            },
-                            height: 50,
-                            initialPage: 1,
-                            enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                            viewportFraction: 0.3),
+                          ),
+                          Expanded(
+                            child: Icon(
+                              Icons.more_vert,
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: Text(
+                                    'SPENT',
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: Text(
+                                    '\$ 1,400,000',
+                                    style: TextStyle(
+                                      fontSize: 22.0,
+                                      color: Colors.black,
+                                      fontFamily: 'Karla',
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: SizedBox(
+                                    height: 2,
+                                    width: 40,
+                                    child: ColoredBox(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                AnimatedOpacity(
-                  duration: duration,
-                  opacity: _actionsOpacity,
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: CarouselSlider.builder(
-                        carouselController: actionsController,
-                        itemCount: months.length,
-                        itemBuilder: (context, index, realIndex) {
-                          return Container(
-                            child: Center(
-                              child: Transform.scale(
-                                scale: _currentActionsPageDouble != null
-                                    ? 1 -
-                                        (realIndex -
-                                                _currentActionsPageDouble)
-                                            .abs()
-                                    : 1,
-                                child: ActionCard(),
+                TweenAnimationBuilder(
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 1500),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  builder: (BuildContext context, double value, Widget child) {
+                    return Transform.scale(
+                      child: child,
+                      scale: value,
+                    );
+                  },
+                  child: AnimatedOpacity(
+                    opacity: _datesOpacity,
+                    duration: duration,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.white,
+                        child: CarouselSlider.builder(
+                          carouselController: monthsController,
+                          itemCount: months.length,
+                          itemBuilder: (context, index, realIndex) {
+                            return Container(
+                              child: Center(
+                                child: Transform.scale(
+                                  scale: _currentMonthsPageDouble != null
+                                      ? 1.7 -
+                                          (realIndex - _currentMonthsPageDouble)
+                                              .abs()
+                                      : 1.7,
+                                  child: Text(
+                                    months[index],
+                                    style: TextStyle(
+                                      fontFamily: 'Karla',
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        options: CarouselOptions(
-                            aspectRatio: 1,
-                            initialPage: 1,
-                            onPageChanged: (index, reason) {
-                              if (reason !=
-                                  CarouselPageChangedReason.controller) {
+                            );
+                          },
+                          options: CarouselOptions(
+                              onPageChanged: (index, reason) {
+                                if (reason !=
+                                    CarouselPageChangedReason.controller) {
+                                  setState(() {
+                                    _currentMonthsPage = index;
+                                    actionsController
+                                        .animateToPage(_currentMonthsPage);
+                                  });
+                                }
+                              },
+                              onScrolled: (page) {
                                 setState(() {
-                                  _currentActionsPage = index;
-                                  monthsController
-                                      .animateToPage(_currentActionsPage);
+                                  _currentMonthsPageDouble = page;
                                 });
-                              }
-                            },
-                            onScrolled: (page) {
-                              setState(() {
-                                _currentActionsPageDouble = page;
-                              });
-                            },
-                            viewportFraction: 0.9),
-                      )),
+                              },
+                              height: 50,
+                              initialPage: 1,
+                              enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                              viewportFraction: 0.3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                TweenAnimationBuilder(
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 1700),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  builder: (BuildContext context, double value, Widget child) {
+                    return Transform.scale(
+                      child: child,
+                      scale: value,
+                    );
+                  },
+                  child: AnimatedOpacity(
+                    duration: duration,
+                    opacity: _actionsOpacity,
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: CarouselSlider.builder(
+                          carouselController: actionsController,
+                          itemCount: months.length,
+                          itemBuilder: (context, index, realIndex) {
+                            return Container(
+                              child: Center(
+                                child: Transform.scale(
+                                  scale: _currentActionsPageDouble != null
+                                      ? 1 -
+                                          (realIndex -
+                                                  _currentActionsPageDouble)
+                                              .abs()
+                                      : 1,
+                                  child: ActionCard(),
+                                ),
+                              ),
+                            );
+                          },
+                          options: CarouselOptions(
+                              aspectRatio: 1,
+                              initialPage: 1,
+                              onPageChanged: (index, reason) {
+                                if (reason !=
+                                    CarouselPageChangedReason.controller) {
+                                  setState(() {
+                                    _currentActionsPage = index;
+                                    monthsController
+                                        .animateToPage(_currentActionsPage);
+                                  });
+                                }
+                              },
+                              onScrolled: (page) {
+                                setState(() {
+                                  _currentActionsPageDouble = page;
+                                });
+                              },
+                              viewportFraction: 0.9),
+                        )),
+                  ),
                 ),
               ],
             ),
@@ -386,67 +419,77 @@ class Action extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
+      padding: const EdgeInsets.only(left: 8, right: 8),
+      child: Column(
         children: [
-          Expanded(
-            flex: 1,
-            child: Icon(
-              icon,
-              size: 32,
-              color: iconColor,
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      date,
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              "\$ $money",
-              textAlign: TextAlign.end,
-              maxLines: 1,
-              softWrap: false,
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: isIncome
-                ? Icon(
-                    Icons.trending_up,
-                    color: Colors.green,
-                  )
-                : Icon(
-                    Icons.trending_down_outlined,
-                    color: Colors.red,
+          Padding(
+            padding: const EdgeInsets.only(top: 12, bottom: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Icon(
+                    icon,
+                    size: 32,
+                    color: iconColor,
                   ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            date,
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    "\$ $money",
+                    textAlign: TextAlign.end,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: isIncome
+                      ? Icon(
+                          Icons.trending_up,
+                          color: Colors.green,
+                        )
+                      : Icon(
+                          Icons.trending_down_outlined,
+                          color: Colors.red,
+                        ),
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: Colors.grey,
           ),
         ],
       ),
