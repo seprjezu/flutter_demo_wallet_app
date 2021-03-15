@@ -57,239 +57,237 @@ class _DetailsPageState extends State<DetailsPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Dashboard'),
-        ),
-        body: Container(
-          color: Colors.grey[100],
-          child: ListView(
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 32.0,
-                      right: 32.0,
-                      left: 32.0,
-                      bottom: 8.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+      body: Container(
+        color: Colors.grey[100],
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 32.0,
+                    right: 32.0,
+                    left: 32.0,
+                    bottom: 8.0,
+                  ),
+                  child: Hero(
+                    tag: widget.cardItem.id,
+                    child: CardWidget(
+                      item: widget.cardItem.isExpanded
+                          ? CardItem(
+                              widget.cardItem.id,
+                              widget.cardItem.logo,
+                              widget.cardItem.lastNumbers,
+                              widget.cardItem.owner,
+                              widget.cardItem.endDate,
+                              widget.cardItem.startColor,
+                              widget.cardItem.endColor,
+                              false,
+                            )
+                          : widget.cardItem,
                     ),
-                    child: Hero(
-                      tag: widget.cardItem.id,
-                      child: CardWidget(
-                        item: widget.cardItem.isExpanded
-                            ? CardItem(
-                                widget.cardItem.id,
-                                widget.cardItem.logo,
-                                widget.cardItem.lastNumbers,
-                                widget.cardItem.owner,
-                                widget.cardItem.endDate,
-                                widget.cardItem.startColor,
-                                widget.cardItem.endColor,
-                                false,
+                  ),
+                ),
+                AnimatedOpacity(
+                  opacity: _incomeOpacity,
+                  duration: duration,
+                  child: Container(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Text(
+                                  'INCOME',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 16.0),
+                                child: Text(
+                                  '\$ 3,200,000',
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    color: Colors.black,
+                                    fontFamily: 'Karla',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: SizedBox(
+                                  height: 2,
+                                  width: 40,
+                                  child: ColoredBox(
+                                    color: Colors.green,
+                                  ),
+                                ),
                               )
-                            : widget.cardItem,
-                      ),
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    opacity: _incomeOpacity,
-                    duration: duration,
-                    child: Container(
-                      color: Colors.white,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Text(
-                                    'INCOME',
-                                    style: TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0),
-                                  child: Text(
-                                    '\$ 3,200,000',
-                                    style: TextStyle(
-                                      fontSize: 22.0,
-                                      color: Colors.black,
-                                      fontFamily: 'Karla',
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: SizedBox(
-                                    height: 2,
-                                    width: 40,
-                                    child: ColoredBox(
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                            ],
                           ),
-                          Expanded(
-                            child: Icon(
-                              Icons.more_vert,
-                              color: Colors.black.withOpacity(0.2),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Text(
-                                    'SPENT',
-                                    style: TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0),
-                                  child: Text(
-                                    '\$ 1,400,000',
-                                    style: TextStyle(
-                                      fontSize: 22.0,
-                                      color: Colors.black,
-                                      fontFamily: 'Karla',
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: SizedBox(
-                                    height: 2,
-                                    width: 40,
-                                    child: ColoredBox(
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    opacity: _datesOpacity,
-                    duration: duration,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Colors.white,
-                        child: CarouselSlider.builder(
-                          carouselController: monthsController,
-                          itemCount: months.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return Container(
-                              child: Center(
-                                child: Transform.scale(
-                                  scale: _currentMonthsPageDouble != null
-                                      ? 1.7 -
-                                          (realIndex - _currentMonthsPageDouble)
-                                              .abs()
-                                      : 1.7,
-                                  child: Text(
-                                    months[index],
-                                    style: TextStyle(
-                                      fontFamily: 'Karla',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          options: CarouselOptions(
-                              onPageChanged: (index, reason) {
-                                if (reason !=
-                                    CarouselPageChangedReason.controller) {
-                                  setState(() {
-                                    _currentMonthsPage = index;
-                                    actionsController
-                                        .animateToPage(_currentMonthsPage);
-                                  });
-                                }
-                              },
-                              onScrolled: (page) {
-                                setState(() {
-                                  _currentMonthsPageDouble = page;
-                                });
-                              },
-                              height: 50,
-                              initialPage: 1,
-                              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                              viewportFraction: 0.3),
                         ),
+                        Expanded(
+                          child: Icon(
+                            Icons.more_vert,
+                            color: Colors.black.withOpacity(0.2),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Text(
+                                  'SPENT',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 16.0),
+                                child: Text(
+                                  '\$ 1,400,000',
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    color: Colors.black,
+                                    fontFamily: 'Karla',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: SizedBox(
+                                  height: 2,
+                                  width: 40,
+                                  child: ColoredBox(
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                AnimatedOpacity(
+                  opacity: _datesOpacity,
+                  duration: duration,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.white,
+                      child: CarouselSlider.builder(
+                        carouselController: monthsController,
+                        itemCount: months.length,
+                        itemBuilder: (context, index, realIndex) {
+                          return Container(
+                            child: Center(
+                              child: Transform.scale(
+                                scale: _currentMonthsPageDouble != null
+                                    ? 1.7 -
+                                        (realIndex - _currentMonthsPageDouble)
+                                            .abs()
+                                    : 1.7,
+                                child: Text(
+                                  months[index],
+                                  style: TextStyle(
+                                    fontFamily: 'Karla',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                            onPageChanged: (index, reason) {
+                              if (reason !=
+                                  CarouselPageChangedReason.controller) {
+                                setState(() {
+                                  _currentMonthsPage = index;
+                                  actionsController
+                                      .animateToPage(_currentMonthsPage);
+                                });
+                              }
+                            },
+                            onScrolled: (page) {
+                              setState(() {
+                                _currentMonthsPageDouble = page;
+                              });
+                            },
+                            height: 50,
+                            initialPage: 1,
+                            enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                            viewportFraction: 0.3),
                       ),
                     ),
                   ),
-                  AnimatedOpacity(
-                    duration: duration,
-                    opacity: _actionsOpacity,
-                    child: Container(
-                        alignment: Alignment.center,
-                        child: CarouselSlider.builder(
-                          carouselController: actionsController,
-                          itemCount: months.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return Container(
-                              child: Center(
-                                child: Transform.scale(
-                                  scale: _currentActionsPageDouble != null
-                                      ? 1 -
-                                          (realIndex -
-                                                  _currentActionsPageDouble)
-                                              .abs()
-                                      : 1,
-                                  child: ActionCard(),
-                                ),
+                ),
+                AnimatedOpacity(
+                  duration: duration,
+                  opacity: _actionsOpacity,
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: CarouselSlider.builder(
+                        carouselController: actionsController,
+                        itemCount: months.length,
+                        itemBuilder: (context, index, realIndex) {
+                          return Container(
+                            child: Center(
+                              child: Transform.scale(
+                                scale: _currentActionsPageDouble != null
+                                    ? 1 -
+                                        (realIndex -
+                                                _currentActionsPageDouble)
+                                            .abs()
+                                    : 1,
+                                child: ActionCard(),
                               ),
-                            );
-                          },
-                          options: CarouselOptions(
-                              aspectRatio: 1,
-                              initialPage: 1,
-                              onPageChanged: (index, reason) {
-                                if (reason !=
-                                    CarouselPageChangedReason.controller) {
-                                  setState(() {
-                                    _currentActionsPage = index;
-                                    monthsController
-                                        .animateToPage(_currentActionsPage);
-                                  });
-                                }
-                              },
-                              onScrolled: (page) {
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                            aspectRatio: 1,
+                            initialPage: 1,
+                            onPageChanged: (index, reason) {
+                              if (reason !=
+                                  CarouselPageChangedReason.controller) {
                                 setState(() {
-                                  _currentActionsPageDouble = page;
+                                  _currentActionsPage = index;
+                                  monthsController
+                                      .animateToPage(_currentActionsPage);
                                 });
-                              },
-                              viewportFraction: 0.9),
-                        )),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                              }
+                            },
+                            onScrolled: (page) {
+                              setState(() {
+                                _currentActionsPageDouble = page;
+                              });
+                            },
+                            viewportFraction: 0.9),
+                      )),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
