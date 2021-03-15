@@ -118,7 +118,7 @@ class _MyAppState extends State<MyApp> {
             MaterialPage(
               key: ValueKey('ListPage'),
               child: ListPage(
-                items: items,
+                items: List.from(items),
                 onTapped: _handleCardTapped,
               ),
             ),
