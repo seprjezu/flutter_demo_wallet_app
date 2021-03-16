@@ -331,66 +331,50 @@ class ActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.topCenter, children: [
-      Padding(
-        padding: const EdgeInsets.only(top: 8),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-            shape: BoxShape.rectangle,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 32),
-            child: Column(
-              children: [
-                Action(
-                  icon: Icons.monetization_on_outlined,
-                  iconColor: Colors.blue[300],
-                  title: "Visa",
-                  date: "4 SEPTEMBER",
-                  money: "12,333.0",
-                  isIncome: true,
-                ),
-                Action(
-                  icon: Icons.shopping_cart_outlined,
-                  iconColor: Colors.lightGreen[300],
-                  title: "Shopping",
-                  date: "6 SEPTEMBER",
-                  money: "234.5",
-                  isIncome: false,
-                ),
-                Action(
-                  icon: Icons.car_rental,
-                  iconColor: Colors.red[300],
-                  title: "Car",
-                  date: "13 SEPTEMBER",
-                  money: "2,123.0",
-                  isIncome: false,
-                ),
-                Action(
-                  icon: Icons.monetization_on_outlined,
-                  iconColor: Colors.blue[300],
-                  title: "Visa",
-                  date: "23 SEPTEMBER",
-                  money: "1,243.0",
-                  isIncome: true,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
       Container(
         decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.circular(16.0),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
           shape: BoxShape.rectangle,
         ),
+        padding: const EdgeInsets.only(top: 8),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-          child: Text(
-            "2021",
-            style: TextStyle(color: Colors.white, fontSize: 10),
+          padding: const EdgeInsets.only(top: 32),
+          child: Column(
+            children: [
+              Action(
+                icon: Icons.monetization_on_outlined,
+                iconColor: Colors.blue[300],
+                title: "Visa",
+                date: "4 SEPTEMBER",
+                money: "12,333.0",
+                isIncome: true,
+              ),
+              Action(
+                icon: Icons.shopping_cart_outlined,
+                iconColor: Colors.lightGreen[300],
+                title: "Shopping",
+                date: "6 SEPTEMBER",
+                money: "234.5",
+                isIncome: false,
+              ),
+              Action(
+                icon: Icons.car_rental,
+                iconColor: Colors.red[300],
+                title: "Car",
+                date: "13 SEPTEMBER",
+                money: "2,123.0",
+                isIncome: false,
+              ),
+              Action(
+                icon: Icons.monetization_on_outlined,
+                iconColor: Colors.blue[300],
+                title: "Visa",
+                date: "23 SEPTEMBER",
+                money: "1,243.0",
+                isIncome: true,
+              ),
+            ],
           ),
         ),
       ),

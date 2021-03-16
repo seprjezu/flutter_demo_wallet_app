@@ -176,43 +176,39 @@ class _CardWidgetState extends State<CardWidget> with TickerProviderStateMixin {
             AnimatedOpacity(
               opacity: widget.item.isExpanded ? 1.0 : 0.0,
               duration: duration,
-              child: AnimatedSize(
-                duration: duration,
-                vsync: this,
-                child: widget.item.isExpanded
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                          top: 16,
-                          left: 8,
-                          right: 16,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              widget.item.owner,
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                fontFamily: 'Karla',
-                              ),
-                            ),
-                            Text(
-                              widget.item.endDate,
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                fontFamily: 'Karla',
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(
-                        width: double.infinity,
-                        height: 0,
+              child: widget.item.isExpanded
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                        top: 16,
+                        left: 8,
+                        right: 16,
                       ),
-              ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.item.owner,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontFamily: 'Karla',
+                            ),
+                          ),
+                          Text(
+                            widget.item.endDate,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontFamily: 'Karla',
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox(
+                      width: double.infinity,
+                      height: 0,
+                    ),
             ),
             AnimatedSize(
               duration: duration,
