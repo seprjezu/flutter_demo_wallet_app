@@ -18,6 +18,19 @@ class _ListPageState extends State<ListPage> {
 
   _ListPageState(this.items);
 
+  Widget _flightShuttleBuilder(
+      BuildContext flightContext,
+      Animation<double> animation,
+      HeroFlightDirection flightDirection,
+      BuildContext fromHeroContext,
+      BuildContext toHeroContext,
+      ) {
+    return DefaultTextStyle(
+      style: DefaultTextStyle.of(toHeroContext).style,
+      child: toHeroContext.widget,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +68,7 @@ class _ListPageState extends State<ListPage> {
             }),
             key: Key(item.id),
             child: Hero(
+              flightShuttleBuilder: _flightShuttleBuilder,
               tag: item.id,
               child: CardWidget(
                 item: item,
